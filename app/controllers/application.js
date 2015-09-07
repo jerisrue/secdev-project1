@@ -1,25 +1,8 @@
 import Ember from 'ember';
 
-/*var Photo = Ember.Object.extend({
-	title: '',
-	username: '',
-	//flickr extra data
-	owner: '',
-	//flickr url data
-	id: '',
-	farm: 0,
-	secret: '',
-	server: '',
-	url: function(){
-		return "https://farm"+this.get('farm')+
-		".staticflickr.com/"+this.get('server')+
-		"/"+this.get('id')+"_"+this.get('secret')+"_b.jpg";
-	}.property('farm','server','id','secret'),
-});*/
-
 var PhotoCollection = Ember.ArrayProxy.extend(Ember.SortableMixin, {
-	sortProperties: ['title'],
-	sortAscending: true,
+	sortProperties: ['dates.taken'],
+	sortAscending: false,
 	content: [],
 });
 
@@ -34,7 +17,7 @@ export default Ember.Controller.extend({
 		var photos = this.get('photos');
 
 		return photos.filter(function(photo){
-			return photo.get('title').match(rx) || photo.get('username').match(rx);
+			return photo.get('title').match(rx) || photo.get('owner.username').match(rx);
 		});
 	}.property('photos.@each','searchField'),
 	actions: {
