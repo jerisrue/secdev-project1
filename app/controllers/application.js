@@ -11,6 +11,11 @@ export default Ember.Controller.extend({
 	searchField: '',
 	tagSearchField: '',
 	tagList: ['hi','cheese'],
+	//filteredPhotosLoaded: false,
+	
+	filteredPhotosLoaded: function(){
+		return this.get('filteredPhotos').length >0;
+	}.property('filteredPhotos.length'),
 	filteredPhotos: function () {
 		var filter = this.get('searchField');
 		var rx = new RegExp(filter, 'gi');
