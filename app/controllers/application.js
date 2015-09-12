@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import LoginControllerMixin from 'simple-auth/mixins/login-controller-mixin';
 
 var PhotoCollection = Ember.ArrayProxy.extend(Ember.SortableMixin, {
 	sortProperties: ['dates.taken'],
@@ -6,13 +7,13 @@ var PhotoCollection = Ember.ArrayProxy.extend(Ember.SortableMixin, {
 	content: [],
 });
 
-export default Ember.Controller.extend({
+export default Ember.Controller.extend(LoginControllerMixin, {
+	authenticator: 'authenticator:torii',
 	photos: PhotoCollection.create(),
 	searchField: '',
 	tagSearchField: '',
 	tagList: ['hi','cheese'],
 	//filteredPhotosLoaded: false,
-	
 	filteredPhotosLoaded: function(){
 		return this.get('filteredPhotos').length >0;
 	}.property('filteredPhotos.length'),

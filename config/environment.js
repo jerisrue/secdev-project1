@@ -22,10 +22,30 @@ module.exports = function(environment) {
       'script-src': "'self' ", 
       'font-src': "'self' ", 
       'connect-src': "'self' https://api.flickr.com", //Allow JSON requests to the flickr api
-      'img-src': "'self' http: https:", //Allow images from any http/https 
+      'img-src': "'self' http: https: data:", //Allow images from any http/https 
       'style-src': "'self' ", 
       'media-src': "'self' "
+    },
+    /*contentSecurityPolicy: {
+          'default-src': "'none'",
+          'script-src': "'self' 'unsafe-inline' 'unsafe-eval'",
+          'font-src': "'self'",
+          'connect-src': "'self'",
+          'img-src': "'self'",
+          'report-uri':"'localhost'",
+          'style-src': "'self' 'unsafe-inline'",
+          'frame-src': "'none'"
+    },*/
+
+    torii: {
+      providers: {
+        'facebook-oauth2': {
+          apiKey: '628286167314532',
+          redirectUri: 'http://localhost:4200'
+        }
+      }
     }
+
   };
 
   if (environment === 'development') {
