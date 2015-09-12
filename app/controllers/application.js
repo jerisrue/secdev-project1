@@ -10,7 +10,7 @@ export default Ember.Controller.extend({
 	photos: PhotoCollection.create(),
 	searchField: '',
 	tagSearchField: '',
-	tagList: ['hi','cheese'],
+	//tagList: ['hi','cheese'],
 	//filteredPhotosLoaded: false,
 	
 	filteredPhotosLoaded: function(){
