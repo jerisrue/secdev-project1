@@ -2,17 +2,30 @@
 <nav class="navbar navbar-default navbar-fixed-top">
 	<div class="container-fluid">
 		<div class="navbar-header">
-			<a class="navbar-brand" href="#">My App</a>
+			<a class="navbar-brand" href="#">Searcha Da Flicka</a>
 		</div>
 		<div class="navbar-right search-field">
 			{{#bs-form formLayout="inline" action="search"}}
 				{{#if filteredPhotos}}
 					{{bs-input type="text" value=searchField placeholder="filter photos"}}
 				{{/if}}
-				{{bs-input type="text" value=tagSearchField action="search" placeholder="search for a flickr tag"}}
-				<button type="submit" class="btn btn-default">
-					<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-				</button>
+				{{#if session.isAuthenticated}}
+					{{bs-input type="text" value=tagSearchField action="search" placeholder="search for a flickr tag"}}
+					<button type="submit" class="btn btn-default">
+						<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+					</button>
+				{{/if}}
+				{{#if session.isAuthenticated}}
+    				<button class="btn btn-default" {{action 'invalidateSession'}}>Logout
+    					<span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+    				</button>
+				{{else}}
+    				<button class="btn btn-default" {{action 'facebookLogin'}}>Login with Facebook
+    					<span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+    				</button>
+				{{/if}}
+
+
 			{{/bs-form}}
 		</div>
 	</div>
@@ -39,7 +52,7 @@
 						<div class="col-md-1 col-xs-1 col-sm-1">Tags:</div>
 						<div class="col-md-11 col-xs-11 col-sm-11">
 							{{#each tag in photo.tags}}
-								<button class="btn btn-info btn-xs post-tag-button" {{action "clicktag" tag}}>#{{tag}}</button> 
+								<button class="btn btn-info btn-xs post-tag-button" {{action "clicktag" tag}}>#{{tag}}</button>
 							{{/each}}
 						</div>
 					</div>
@@ -51,12 +64,16 @@
 			<img src="../page-loading.gif" class="img-responsive center-block"/>
 		{{else}}
 			<div class="jumbotron">
-				<h1>[app-name]</h1>
-				<p>Created by [yourname]</p>
-				<p>Click one of the popular flickr tags below or search one above:</p>
-				{{#each tag in tagList}}
-					<button class="btn btn-info btn-small tag-button" {{action "clicktag" tag}}>#{{tag}}</button>
-				{{/each}}
+				<h1>Amazingly Authenticated Searcher of the Flickr</h1>
+				<p>Created by Jeris Rue</p>
+				{{#if session.isAuthenticated}}
+					<p>Click one of the popular flickr tags below or search one above:</p>
+					{{#each tag in tagList}}
+						<button class="btn btn-info btn-small tag-button" {{action "clicktag" tag}}>#{{tag}}</button>
+					{{/each}}
+				{{else}}
+					<p>Authenticate to Facebook above to start searching!</p>
+				{{/if}}
 			</div>
 		{{/liquid-if}}
 	{{/liquid-if}}
