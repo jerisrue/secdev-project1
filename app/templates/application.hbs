@@ -2,7 +2,7 @@
 <nav class="navbar navbar-default navbar-fixed-top">
 	<div class="container-fluid">
 		<div class="navbar-header">
-			<a class="navbar-brand" href="#">My App</a>
+			<a class="navbar-brand" href="#">Searcha Da Flicka</a>
 		</div>
 		<div class="navbar-right search-field">
 			{{#bs-form formLayout="inline" action="search"}}
@@ -51,8 +51,8 @@
 			<img src="../page-loading.gif" class="img-responsive center-block"/>
 		{{else}}
 			<div class="jumbotron">
-				<h1>[app-name]</h1>
-				<p>Created by [yourname]</p>
+				<h1>Amazingly Authenticated Searcher of the Flickr</h1>
+				<p>Created by Jeris Rue</p>
 				<p>Click one of the popular flickr tags below or search one above:</p>
 				{{#each tag in tagList}}
 					<button class="btn btn-info btn-small tag-button" {{action "clicktag" tag}}>#{{tag}}</button>
